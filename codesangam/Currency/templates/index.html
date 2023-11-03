@@ -1,0 +1,159 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Currency Converter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .form-group label {
+      width: 100px;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 200px;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group select {
+      width: 200px;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-group button {
+      width: 50px;
+      padding: 5px;
+      border: none;
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Currency Converter</h1>
+  <div class="container">
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" value="1" min="1" />
+    </div>
+    <div class="form-group">
+      <label for="from">From:</label>
+      <select id="from">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+        <option value="JPY">JPY</option>
+        <option value="CNY">CNY</option>
+      </select>
+      <button id="swap">&#8645;</button>
+      <label for="to">To:</label>
+      <select id="to">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="INR" selected>INR</option>
+        <option value="JPY">JPY</option>
+        <option value="CNY">CNY</option>
+      </select>
+    </div>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    // Get the elements from the document
+    const amount = document.getElementById("amount");
+    const from = document.getElementById("from");
+    const to = document.getElementById("to");
+    const swap = document.getElementById("swap");
+    const result = document.getElementById("result");
+
+    // Define a function to fetch the exchange rate from the API
+    async function getExchangeRate(fromCurrency, toCurrency) {
+      // Use the exchangerate-api.com to get the latest rates
+      const response = await fetch(`https://v6.exchangerate-api.com/v6//latest/${fromCurrency}`);
+      const data = await response.json();
+      // Return the rate for the toCurrency
+      return data.conversion_rates[toCurrency];
+    }
+
+    // Define a function to convert the amount from one currency to another
+    async function convertCurrency() {
+      // Get the values from the elements
+      const fromCurrency = from.value;
+      const toCurrency = to.value;
+      const amountValue = amount.value;
+      // Get the exchange rate for the pair
+      const rate = await getExchangeRate(fromCurrency, toCurrency);
+      // Calculate the converted amount
+      const convertedAmount = (amountValue * rate).toFixed(2);
+      // Display the result
+      result.textContent = `${amountValue} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+    }
+
+    // Define a function to swap the currencies
+    function swapCurrency() {
+      // Get the values from the elements
+      const fromCurrency = from.value;
+      const toCurrency = to.value;
+      // Swap the values
+      from.value = toCurrency;
+      to.value = fromCurrency;
+      // Convert the currency again
+      convertCurrency();
+    }
+
+    // Add event listeners to the elements
+    amount.addEventListener("input", convertCurrency);
+    from.addEventListener("change", convertCurrency);
+    to.addEventListener("change", convertCurrency);
+    swap.addEventListener("click", swapCurrency);
+
+    // Call the convertCurrency function on page load
+    convertCurrency();
+  </script>
+</body>
+</html>
+```
