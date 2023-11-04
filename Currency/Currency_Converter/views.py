@@ -4,8 +4,10 @@ import requests
 from django.shortcuts import render
 
 def index(request):
-    return render(request,'index2.html')
+    return render(request,'index.html')
 
+
+#copied from chatgpt
 def convert_currency(request):
     amount = request.GET.get('amount')
     from_currency = request.GET.get('from_currency')
