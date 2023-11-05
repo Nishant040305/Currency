@@ -1,159 +1,447 @@
-
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" >
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Currency Converter</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-      color: #333;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-    }
-
-    .form-group {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .form-group label {
-      width: 100px;
-      font-weight: bold;
-    }
-
-    .form-group input {
-      width: 200px;
-      padding: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .form-group select {
-      width: 200px;
-      padding: 5px;
-      border: 1px solid #ccc;
-    }
-
-    .form-group button {
-      width: 50px;
-      padding: 5px;
-      border: none;
-      background-color: #333;
-      color: #fff;
-      cursor: pointer;
-    }
-
-    .result {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      color: green;
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+  <meta name="description" content="A online Currency converter in HTML5, CSS3 and Javascript." />
+  <!-- add icon link -->
+  <link rel = "icon" href="image-removebg-preview.png"
+  type = "png">
 </head>
 <body>
-  <h1>Currency Converter</h1>
-  <div class="container">
-    <div class="form-group">
-      <label for="amount">Amount:</label>
-      <input type="number" id="amount" value="1" min="1" />
-    </div>
-    <div class="form-group">
-      <label for="from">From:</label>
-      <select id="from">
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-        <option value="INR">INR</option>
-        <option value="JPY">JPY</option>
-        <option value="CNY">CNY</option>
-      </select>
-      <button id="swap">&#8645;</button>
-      <label for="to">To:</label>
-      <select id="to">
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-        <option value="INR" selected>INR</option>
-        <option value="JPY">JPY</option>
-        <option value="CNY">CNY</option>
-      </select>
-    </div>
-    <div class="result" id="result">result:</div>
-  </div>
-  <script>
-    // Get the elements from the document
-    const amount = document.getElementById("amount");
-    const from = document.getElementById("from");
-    const to = document.getElementById("to");
-    const swap = document.getElementById("swap");
-    const result = document.getElementById("result");
+<!-- partial:index.partial.html -->
+<!DOCTYPE html> 
 
-    // Define a function to fetch the exchange rate from the API
-    async function getExchangeRate(fromCurrency, toCurrency) {
-      // Use the exchangerate-api.com to get the latest rates
-      const response = await fetch(`http://api.exchangeratesapi.io/v1/latest?access_key=aa54007b6c5e6136b3eba5cf93f4a9a9&format=1${fromCurrency}`);
-      const data = await response.json();
-      // Return the rate for the toCurrency
-      return data.conversion_rates[toCurrency];
-    }
+<html lang="en"> 
 
-    // Define a function to convert the amount from one currency to another
-    async function convertCurrency() {
-      // Get the values from the elements
-      const fromCurrency = from.value;
-      const toCurrency = to.value;
-      const amountValue = amount.value;
-      // Get the exchange rate for the pair
-      const rate = await getExchangeRate(fromCurrency, toCurrency);
-      // Calculate the converted amount
-      const convertedAmount = (amountValue * rate).toFixed(2);
-      // Display the result
-      result.textContent = `${amountValue} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
-    }
+  
 
-    // Define a function to swap the currencies
-    function swapCurrency() {
-      // Get the values from the elements
-      const fromCurrency = from.value;
-      const toCurrency = to.value;
-      // Swap the values
-      from.value = toCurrency;
-      to.value = fromCurrency;
-      // Convert the currency again
-      convertCurrency();
-    }
+<head> 
 
-    // Add event listeners to the elements
-    amount.addEventListener("input", convertCurrency);
-    from.addEventListener("change", convertCurrency);
-    to.addEventListener("change", convertCurrency);
-    swap.addEventListener("click", swapCurrency);
+    <meta charset="UTF-8"> 
 
-    // Call the convertCurrency function on page load
-    convertCurrency();
-  </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  
+
+    <title>Currency Converter</title> 
+
+  
+
+    <link rel="stylesheet" 
+
+          href= 
+
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+
+    <script src= 
+
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> 
+
+    </script> 
+
+    <script src= 
+
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> 
+
+    </script> 
+
+    <script src= 
+
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"> 
+
+    </script> 
+
+  
+
+    <link rel="preconnect" 
+
+          href="https://fonts.gstatic.com"> 
+
+    <link href= 
+
+"https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap" 
+
+          rel="stylesheet"> 
+
+  
+
+    <!-- linking style.css file-->
+
+    <link rel="stylesheet" href="style.css"> 
+
+</head> 
+
+  
+
+<body> 
+
+  
+
+    <!-- Currency Converter  -->
+
+    <h1 class="heading  "> 
+
+        Currency Converter</h1> 
+
+  
+
+    <hr> 
+
+    <div class="container"> 
+
+  
+
+        <div class="main"> 
+
+  
+
+            
+
+  
+
+            <div class="row"> 
+
+                <div class="col-sm-6"> 
+
+                    <div class="input-group mb-3"> 
+
+                        <div class="input-group-prepend"> 
+
+                            <span class="input-group-text">From</span> 
+
+                        </div> 
+
+                        <select class="form-control from" id="sel1"> 
+
+                            <option value="">Select One …</option> 
+
+                            <option value="USD">USD</option> 
+
+                            <option value="AED">AED</option> 
+
+                            <option value="ARS">ARS</option> 
+
+                            <option value="AUD">AUD</option> 
+
+                            <option value="BGN">BGN</option> 
+
+                            <option value="BRL">BRL</option> 
+
+                            <option value="BSD">BSD</option> 
+
+                            <option value="CAD">CAD</option> 
+
+                            <option value="CHF">CHF</option> 
+
+                            <option value="CLP">CLP</option> 
+
+                            <option value="CNY">CNY</option> 
+
+                            <option value="COP">COP</option> 
+
+                            <option value="CZK">CZK</option> 
+
+                            <option value="DKK">DKK</option> 
+
+                            <option value="DOP">DOP</option> 
+
+                            <option value="EGP">EGP</option> 
+
+                            <option value="EUR">EUR</option> 
+
+                            <option value="FJD">FJD</option> 
+
+                            <option value="GBP">GBP</option> 
+
+                            <option value="GTQ">GTQ</option> 
+
+                            <option value="HKD">HKD</option> 
+
+                            <option value="HRK">HRK</option> 
+
+                            <option value="HUF">HUF</option> 
+
+                            <option value="IDR">IDR</option> 
+
+                            <option value="ILS">ILS</option> 
+
+                            <option value="INR">INR</option> 
+
+                            <option value="ISK">ISK</option> 
+
+                            <option value="JPY">JPY</option> 
+
+                            <option value="KRW">KRW</option> 
+
+                            <option value="KZT">KZT</option> 
+
+                            <option value="MVR">MVR</option> 
+
+                            <option value="MXN">MXN</option> 
+
+                            <option value="MYR">MYR</option> 
+
+                            <option value="NOK">NOK</option> 
+
+                            <option value="NZD">NZD</option> 
+
+                            <option value="PAB">PAB</option> 
+
+                            <option value="PEN">PEN</option> 
+
+                            <option value="PHP">PHP</option> 
+
+                            <option value="PKR">PKR</option> 
+
+                            <option value="PLN">PLN</option> 
+
+                            <option value="PYG">PYG</option> 
+
+                            <option value="RON">RON</option> 
+
+                            <option value="RUB">RUB</option> 
+
+                            <option value="SAR">SAR</option> 
+
+                            <option value="SEK">SEK</option> 
+
+                            <option value="SGD">SGD</option> 
+
+                            <option value="THB">THB</option> 
+
+                            <option value="TRY">TRY</option> 
+
+                            <option value="TWD">TWD</option> 
+
+                            <option value="UAH">UAH</option> 
+
+                            <option value="UYU">UYU</option> 
+
+                            <option value="ZAR">ZAR</option> 
+
+                        </select> 
+
+                    </div> 
+                    <div class="form-group"> 
+                        <input type="text" 
+        
+                               class="form-control searchBox" 
+        
+                               placeholder="0.00" 
+        
+                               id="oamount"> 
+                               
+        
+                    </div> 
+          
+                </div> 
+
+  
+
+                <div class="col-sm-6"> 
+
+                    <div class="input-group mb-3"> 
+
+                        <div class="input-group-prepend"> 
+
+                            <span class="input-group-text">To</span> 
+
+                        </div> 
+
+                        <select class="form-control to" id="sel2"> 
+
+                            <option value="">Select One …</option> 
+
+                            <option value="USD">USD</option> 
+
+                            <option value="AED">AED</option> 
+
+                            <option value="ARS">ARS</option> 
+
+                            <option value="AUD">AUD</option> 
+
+                            <option value="BGN">BGN</option> 
+
+                            <option value="BRL">BRL</option> 
+
+                            <option value="BSD">BSD</option> 
+
+                            <option value="CAD">CAD</option> 
+
+                            <option value="CHF">CHF</option> 
+
+                            <option value="CLP">CLP</option> 
+
+                            <option value="CNY">CNY</option> 
+
+                            <option value="COP">COP</option> 
+
+                            <option value="CZK">CZK</option> 
+
+                            <option value="DKK">DKK</option> 
+
+                            <option value="DOP">DOP</option> 
+
+                            <option value="EGP">EGP</option> 
+
+                            <option value="EUR">EUR</option> 
+
+                            <option value="FJD">FJD</option> 
+
+                            <option value="GBP">GBP</option> 
+
+                            <option value="GTQ">GTQ</option> 
+
+                            <option value="HKD">HKD</option> 
+
+                            <option value="HRK">HRK</option> 
+
+                            <option value="HUF">HUF</option> 
+
+                            <option value="IDR">IDR</option> 
+
+                            <option value="ILS">ILS</option> 
+
+                            <option value="INR">INR</option> 
+
+                            <option value="ISK">ISK</option> 
+
+                            <option value="JPY">JPY</option> 
+
+                            <option value="KRW">KRW</option> 
+
+                            <option value="KZT">KZT</option> 
+
+                            <option value="MVR">MVR</option> 
+
+                            <option value="MXN">MXN</option> 
+
+                            <option value="MYR">MYR</option> 
+
+                            <option value="NOK">NOK</option> 
+
+                            <option value="NZD">NZD</option> 
+
+                            <option value="PAB">PAB</option> 
+
+                            <option value="PEN">PEN</option> 
+
+                            <option value="PHP">PHP</option> 
+
+                            <option value="PKR">PKR</option> 
+
+                            <option value="PLN">PLN</option> 
+
+                            <option value="PYG">PYG</option> 
+
+                            <option value="RON">RON</option> 
+
+                            <option value="RUB">RUB</option> 
+
+                            <option value="SAR">SAR</option> 
+
+                            <option value="SEK">SEK</option> 
+
+                            <option value="SGD">SGD</option> 
+
+                            <option value="THB">THB</option> 
+
+                            <option value="TRY">TRY</option> 
+
+                            <option value="TWD">TWD</option> 
+
+                            <option value="UAH">UAH</option> 
+
+                            <option value="UYU">UYU</option> 
+
+                            <option value="ZAR">ZAR</option> 
+
+                        </select> 
+
+                    </div> 
+                                <div class="form-group"> 
+                <label type="text" 
+
+                       class="form-control searchBox" 
+
+                       placeholder="0.00" 
+
+                       id="bamount"> 
+                       
+
+            </div> 
+  
+                </div> 
+
+            </div> 
+
+
+            <div class="text-center"> 
+
+  
+
+                <!-- convert button -->
+
+                <button class="btn btn-primary convert m-2" 
+
+                        type="submit"> 
+
+                     Convert 
+
+              </button> 
+
+  
+
+                <!-- reset button -->
+
+                <button class="btn btn-primary m-2" 
+
+                        onclick="clearVal()"> 
+
+                   Reset 
+
+              </button> 
+
+            </div> 
+
+  
+
+        </div> 
+
+  
+
+        <div id="finalAmount" class="text-center"> 
+
+  
+
+            <!-- Display the converted amount -->
+
+            
+
+ 
+
+        </div> 
+
+    </div> 
+
+  
+
+    <!-- linking script.js file -->
+
+    <script src="script.js"></script> 
+
+</bo> 
+
+  
+
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
 </body>
 </html>
-
