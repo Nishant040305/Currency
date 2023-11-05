@@ -1,6 +1,6 @@
 // include api for currency change 
 //our api is http://api.exchangeratesapi.io/v1/latest?access_key=aa54007b6c5e6136b3eba5cf93f4a9a9/USD
-const api = " http://api.exchangeratesapi.io/v1/latest?access_key=aa54007b6c5e6136b3eba5cf93f4a9a9/USD"; 
+const api = " http://api.exchangeratesapi.io/v1/latest?access_key=aa54007b6c5e6136b3eba5cf93f4a9a9"; 
 
 
 // for selecting different controls 
