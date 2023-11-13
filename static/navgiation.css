@@ -1,0 +1,74 @@
+.logo_img{
+    height: 70px;
+    width: 70px;
+}
+.menu__bar{
+    background-color:#161515;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+.logo{
+    color: white;
+    font-size: 30px;
+}
+.logo span {
+    color: blue;
+
+    }
+.menu__bar ul{
+    list-style: none;
+    display: flex;
+}
+
+.menu__bar ul li{
+    padding: 10px 30px;
+    position: relative;
+
+}
+.menu__bar ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+.tab__nav{
+    color:#cbc3c3;
+}
+
+.menu__bar ul li a:hover{
+    color:blue;
+}
+.dropdown__menu{
+    display:none;
+}
+.menu__bar ul li:hover .dropdown__menu{
+    display:block;
+    position:absolute;
+    left:0;
+    top:100%;
+    background-color: #161515;
+}
+.dropdown__menu ul{
+    display: block;
+    margin: 10px;
+}
+.menu__bar ul li:hover .dropdown__menu ul li {
+    width:131.5px;
+    padding: 10px;
+}
+
+.dropdown__menu-1{
+    display:none;
+}
+.dropdown__menu ul li:hover .dropdown__menu-1{
+    display:block;
+    position: absolute;
+    top:0;
+    right:130px;
+
+    background:#161515;
+}
