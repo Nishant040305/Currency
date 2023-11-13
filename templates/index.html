@@ -1,0 +1,297 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Currency Converter</title>
+  <link rel="stylesheet" text="text/css" href="{%static 'style.css' %}">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+  <meta name="description" content="A online Currency converter in HTML5, CSS3 and Javascript." />
+  <!-- add icon link -->
+  <link rel = "icon" href="image-removebg-preview.png"
+  type = "png">
+
+
+
+
+  
+
+<head> 
+    <meta charset="UTF-8"> 
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  
+
+    <title>Currency Converter</title> 
+ 
+    <link 
+
+    rel="stylesheet" 
+
+          href= 
+
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+
+    <script src= 
+
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> 
+
+    </script> 
+
+    <script src= 
+
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> 
+
+    </script> 
+
+    <script src= 
+
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"> 
+
+    </script> 
+
+  
+
+    <link rel="preconnect" 
+
+          href="https://fonts.gstatic.com"> 
+
+    <link href= 
+
+"https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap" 
+
+          rel="stylesheet"> 
+
+
+    <!-- linking style.css file-->
+    <link rel="stylesheet" type="text/css" href= "{% static 'navgiation.css'%} "></style>
+    <link rel="stylesheet" type="text/css" href= "{% static 'style.css'%} "></style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head> 
+
+  
+<!--Navigation bar bootstrap-->
+<body> 
+<div class="menu__bar">
+  <h1 class="logo"><img class = 'logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span></h1>
+
+  <ul>
+    <li><a class="tab__nav" herf="#">Home</a></li>
+    <li><a class="tab__nav " name="calcwindow" id = "calcwindow" onclick = "calcvisible()" herf="" value='visible'>Calculator</a></li>
+    <li><a class="tab__nav" herf="#">News</a></li>
+    <li><a class="tab__nav" herf="#">Options</a><!-- <i class="fas fa-caret-down">-->
+      <div class="dropdown__menu">
+        <ul>
+          <li><a href="#">Favourite</a>
+          <!-- <i class="fas fa-caret-right">-->
+            <div class="dropdown__menu-1">
+              <ul>
+                {%for i in favpair%}
+                <li><a class = 'favlist' onclick="favShow(({{i.fromCode}},{{i.toCode}}))">{{i.fromCode}}<img style="height:8mm ; width: 8mm;"src="{% static "arrow3.jpg" %}" >{{i.toCode}}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+          <li><a onclick="historyShow()"href="#">History</a></li>
+        </ul>
+      </div></li>
+  </ul></div>
+
+<!-- Currency Converter  -->
+    
+<br>
+
+
+
+  
+
+
+  <form action='',method='GET'>
+  
+
+        <div class="main" style=" float: left;"> 
+          <h1 class="heading  "> 
+
+            Currency Converter</h1> 
+    
+            <hr> 
+
+            
+
+  
+
+            <div class="row"> 
+
+                <div class="col-sm-6 fromSearch"> 
+
+                    <div class="input-group mb-3"> 
+
+                        <div class="input-group-prepend"> 
+
+                            <span class="input-group-text">From</span> 
+
+                        </div> 
+
+                          <select class="form-control from" method='POST' name = 'fromCode' id="sel1"> 
+                            <option id="option1",value = {{fcurrencyCode}}> {{fcurrencyCode}}</option> 
+
+                          {%for i,j in context.items%}
+                          <option value={{j}}>{{j}}</option>
+                          {% endfor %}
+
+                        </select> 
+
+                    </div> 
+                    <div class="form-group"> 
+                        <input type="text" 
+                                name = 'oamount'
+                               class="form-control searchBox" 
+
+
+                               placeholder="{{fAmount}}" 
+                              
+                               id="oamount"> 
+                               
+        
+                    </div> 
+          
+                </div> 
+                {% comment %} <button id = 'Favourite'> </button> {% endcomment %}
+                {% comment %} <button  id='Favourite' type='submit' value = 'fav' name = 'fav'><img style= "height:1cm; width:1cm;"src="{%static 'heart.png' %}"> </button> {% endcomment %}
+
+                <div class="col-sm-6 "> 
+ 
+                    <div class="input-group mb-3"> 
+
+                        <div class="input-group-prepend"> 
+
+                            <span class="input-group-text">To</span> 
+
+                        </div> 
+
+                        <select class="form-control to" method="POST"  name = 'toCode' id="sel2"> 
+
+                            <option id ='option2'value="{{tcurrencyCode}}"> {{tcurrencyCode}}</option> 
+
+                            {%for i,j in context.items%}
+                            <option value={{j}}>{{j}}</option>
+                            {% endfor %}
+
+                        </select> 
+                      </form>
+                    </div> 
+                                <div class="form-group"> 
+                  <label type="text" 
+
+                       class="form-control searchBox" 
+
+
+
+                       id="bamount">{{tAmount}}
+                       
+                       </label>
+                       
+
+          </div>
+
+                </div> 
+              
+            </div> 
+
+
+            <div class="text-center"> 
+
+  
+
+                <!-- convert button -->
+                <button  id='Favourite' type='submit' value = 'fav' name = 'fav'><img style= "height:9mm; width: 9mm;"src="{%static 'star.jpg' %}"></button> 
+                <button class="btn btn-primary convert m-2"  
+
+                         type="submit" value = 'convert' name = 'convert'> 
+
+                     Convert 
+
+              </button> 
+
+              
+
+                <!-- reset button -->
+
+                <button class="btn btn-primary m-2" 
+
+                        onclick="clearVal()"> 
+
+                   Reset 
+
+              </button> 
+
+            </div> 
+
+  
+
+        </div> 
+
+    
+
+  
+      </form>
+   
+
+
+  <div class="calc" id = "calculator" style="float: right;     visibility: {{calcvisible}};">
+    <input type="text" id="result" disabled>
+    <br>
+    <button class="calcbut special" onclick="clearAll()">AC</button>
+    <button class="calcbut special" onclick="backspace()">CE</button>
+    <button class="calcbut special" onclick="appendNumber('%')">%</button>
+    <button class="calcbut special" onclick="appendOperator(' / ')">/</button>
+
+    <br>
+    <button class="calcbut" onclick="appendNumber('7')">7</button>
+    <button class="calcbut" onclick="appendNumber('8')">8</button>
+    <button class="calcbut" onclick="appendNumber('9')">9</button>
+    <button class="calcbut special" onclick="appendOperator(' * ')">*</button>
+    <br>
+    <button class="calcbut" onclick="appendNumber('4')">4</button>
+    <button class="calcbut" onclick="appendNumber('5')">5</button>
+    <button class="calcbut" onclick="appendNumber('6')">6</button>
+    <button class="calcbut special" onclick="appendOperator(' - ')">-</button>
+    <br>
+    <button class="calcbut" onclick="appendNumber('1')">1</button>
+    <button class="calcbut" onclick="appendNumber('2')">2</button>
+    <button class="calcbut" onclick="appendNumber('3')">3</button>
+    <button class="calcbut special" onclick="appendOperator(' + ')">+</button>
+    <br>  
+
+
+    <button class="calcbut" id = 'o' onclick="appendNumber('0')">0</button>
+    <button class="calcbut special"onclick="appendNumber('.')">.</button>
+    <button class="calcbut special"id="equals" onclick="calculateResult()">=</button>
+  </div>
+<div class="history" id = "historyBlock" style="border-width:10px; margin-left:700px;">
+  {%for i in history%}
+  <br>
+  <div class="history_data">
+  <label style="margin-left:100px">{{i.fcurrencyCode}}</label><label style="margin-left:70px">{{i.tcurrencyCode}}</label>
+  <hr style="width:50%; padding-left:20px; margin-left:40px; height:2px; margin-top:0px;margin-bottom:0px;">
+  <label style="margin-left:100px">{{i.fAmount}}</label><label style="margin-left:100px">{{i.tAmount}}</label>
+  <br>
+  </div>
+  {% endfor %}
+</div>
+
+    
+    </body>
+    </html>
+    <script src = "{% static 'script.js' %}"></script>
+
+</body> 
+
+  
+
+</html>
+
