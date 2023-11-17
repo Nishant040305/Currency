@@ -37,8 +37,8 @@ hr {
     border-color: black;
     box-shadow:10px 10px 3px #9c9c9c;
     padding: 30px; 
-    margin-left: 20px;
-    margin-top:0px;
+    margin-left: 50px;
+    margin-top:40px;
     background-color: #ffffff; 
 
 } 
@@ -137,56 +137,7 @@ label {
     width: 1mm;
 }
 
-#calculator {
-    width: 265px;
-    background-color: #fff;
-    box-shadow: #3e3e3e;
-    border: 1px solid #000;
-    margin-right: 7cm;
-    margin-top: 150px;
-    border-radius: 5px;
-    padding: 10px;
 
-    display: none;
-}
-
-.calcbut {
-    width: 45px;
-    height: 45px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    color: #fff;
-    background-color: #000;
-}
-#o{
-    width: 103px;
-    height: 45px;
-    margin: 5px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    color: #fff;
-    background-color: #000;
-}
-.special{
-    background-color: rgb(44, 162, 195);
-}
-#result {
-    width: 235px;
-    height: 45px;
-    margin: 5px 0;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    text-align: right;
-    font-size: 18px;
-    color: #fff;
-    background-color: #000;
-}
 .container{
     width: 100%;
 }
@@ -214,4 +165,82 @@ label {
 }
 #sel1{
     width:206px;
+}
+
+/*for options*/
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    background: #ffffff;
+}
+.select-menu{
+    width: 380px;
+    margin: 140px auto;
+}
+.select-menu .select-btn{
+    display: flex;
+    height: 55px;
+    background: #fff;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 8px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.select-btn i{
+    font-size: 25px;
+    transition: 0.3s;
+}
+.select-menu.active .select-btn i{
+    transform: rotate(-180deg);
+}
+.select-menu .options{
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    display: none;
+}
+.select-menu.active .options{
+    display: block;
+}
+.options .option{
+    display: flex;
+    height: 55px;
+    cursor: pointer;
+    padding: 0 16px;
+    border-radius: 8px;
+    align-items: center;
+    background: #fff;
+}
+.options .option:hover{
+    background: #ffffff;
+}
+.option i{
+    font-size: 25px;
+    margin-right: 12px;
+}
+.option .option-text{
+    font-size: 18px;
+    color: #333;
+}
+/* for history block*/
+#historyBlock{
+    display: none;
+    width:529.1px;
+    overflow-y: auto;
+    max-height: 440px;
+
 }
