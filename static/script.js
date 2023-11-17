@@ -83,6 +83,8 @@ function calcvisible(){
     if(display==1){
         calculator.style.display='block';
         display = 0;
+        his.style.display='none';
+        display_his=1;
 
     }
     else{
@@ -93,6 +95,8 @@ function calcvisible(){
 function historyShow(){
     if(display_his==1){
         his.style.display='block';
+        calculator.style.display='none';
+        display =1;
         display_his=0;
     }
     else{
