@@ -42,13 +42,12 @@ function appendOperator(operator) {
 
 }
 
+
 function calculateResult() {
 
     
     resultField.value =eval (currentInput);
-    intialValue.value = resultField.value;
     searchValue = resultField.value;
-    getResults();
     
     currentOperator = null;
     resetField()
