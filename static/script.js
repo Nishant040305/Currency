@@ -3,13 +3,6 @@
 // //http://api.exchangeratesapi.io/v1/latest?access_key=aa54007b6c5e6136b3eba5cf93f4a9a9
 // //https://api.exchangerate-api.com/v4/latest/USD in case of problem
 
-function clearVal() { 
-
-    window.location.reload(); 
-
-    document.getElementsByClassName("finalValue").innerHTML = ""; 
-};
-
 
 var display_his = 0;
 var his = document.getElementById('historyBlock');
@@ -21,8 +14,34 @@ let currentOperator = null;
 let shouldResetField = false;
 let firstOperand = null;
 let secondOperand = null;
-
+var fromCurrecy=document.querySelector('.from');
+var toCurrecy = document.querySelector('.to');
 var display = 0;
+var searchValue = document.getElementById('oamount');
+
+//for options tag
+// const optionMenu = document.querySelector(".select-menu"),
+//        selectBtn = optionMenu.querySelectorAll(".select-btn"),
+//        options = optionMenu.querySelectorAll(".option"),
+//        sBtn_text = optionMenu.querySelector(".sBtn-text");
+
+// selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));       
+
+// options.forEach(option =>{
+//     option.addEventListener("click", ()=>{
+//         let selectedOption = option.querySelector(".option-text").innerText;
+//         sBtn_text.innerText = selectedOption;
+
+//         optionMenu.classList.remove("active");
+//     });
+// });
+function clearVal() { 
+
+    window.location.reload(); 
+
+    document.getElementsByClassName("finalValue").innerHTML = ""; 
+};
+
 
 function appendNumber(number) {
     
@@ -42,13 +61,11 @@ function appendOperator(operator) {
 
 }
 
-
 function calculateResult() {
 
     
     resultField.value =eval (currentInput);
-    searchValue = resultField.value;
-    
+    searchValue.value = resultField.value;
     currentOperator = null;
     resetField()
 }
@@ -103,9 +120,10 @@ function historyShow(){
         display_his=1;
     }
 }
-function favshow(t){
-    document.getElementById('option1').value = t[0];
-    document.getElementById('option2').value = t[1];
-    document.getElementById('option1').innerHTML = t[0];
-    document.getElementById('option2').innerHTML = t[1];
+function favShow(t,k){
+    document.getElementById('option1').value = t;
+    document.getElementById('option2').value = k;
+    document.getElementById('option1').innerHTML = t;
+    document.getElementById('option2').innerHTML = k;
+
 }
