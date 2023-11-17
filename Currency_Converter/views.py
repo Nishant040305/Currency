@@ -5,7 +5,6 @@ import time
 import threading
 from django.http import JsonResponse
 import requests
-import feedparser
 from csv import reader
 from django.contrib.staticfiles.storage import staticfiles_storage
 from .models import favPain
