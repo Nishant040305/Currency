@@ -1,0 +1,109 @@
+/*91.44 x 152.4 cm*/
+
+.e_logo_img{
+    height: 70px;
+    width: 70px;
+}
+.e_country{
+    height:35px;
+    width:1.586805cm;
+    border: 1px solid #dedbdb;
+}
+.e_menu__bar{
+    margin-left: 50px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #4b9dff;
+    height: 80px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+.e_logo{
+    color: white;
+    font-size: 20px;
+}
+.logo span {
+    color: #fbfbfb;
+
+    }
+.e_menu__bar ul{
+    margin-right: 150px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.e_menu__bar ul li{
+    padding: 10px 30px;
+    position: relative;
+
+}
+.e_menu__bar ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+.tab__nav{
+    color:#cbc3c3;
+}
+
+.e_menu__bar ul li a:hover{
+    color:blue;
+}
+.dropdown__menu{
+    display:none;
+}
+.e_menu__bar ul li:hover .dropdown__menu{
+    display:block;
+    position:absolute;
+    left:0;
+    top:100%;
+    background-color: #161515;
+}
+.dropdown__menu ul{
+    display: block;
+    margin: 10px;
+}
+.e_menu__bar ul li:hover .dropdown__menu ul li {
+    width:135.5px;
+    padding: 10px;
+}
+
+.dropdown__menu-1{
+    display:none;
+}
+.dropdown__menu ul li:hover .dropdown__menu-1{
+    display:block;
+    position: absolute;
+    top:0;
+    right:130px;
+    width:150px;
+    background:#161515;
+}
+
+/* exchange rate*/
+.exchange_data{
+    width: 70%;
+    margin-left: 50px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+
+
+}
+.data{
+    margin-bottom: 2px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #d9d7d7;
+    box-shadow: #000000;
+
+}
+.data span{
+    font-size: larger;
+}
