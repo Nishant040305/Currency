@@ -9,7 +9,10 @@ from csv import reader
 from django.contrib.staticfiles.storage import staticfiles_storage
 from .models import favPain
 from .models import History
-
+proxies = {
+  'http': 'http://edcguest:edcguest@172.31.100.27:3128',
+  'https': 'http://edcguest:edcguest@172.31.100.27:3128',
+}
 csv_file_path = staticfiles_storage.path('currency_name.csv')
 content = {}
 with open(csv_file_path,'r') as f:
@@ -18,8 +21,13 @@ with open(csv_file_path,'r') as f:
         content[f"""/static/flag/{i[0]}.png"""]=i[1]
 duration = 6000
 start = time.time()
-url ="https://api.exchangerate-api.com/v4/latest/USD"
-response = requests.get(url).json()
+try:
+    url ="https://api.exchangerate-api.com/v4/latest/USD"
+    response = requests.get(url).json()
+except:
+    #for proxy servers
+    url ="https://api.exchangerate-api.com/v4/latest/USD"
+    response = requests.get(url,proxies=proxies).json()
 rates = response[ "rates"]
 def index(request):
     global content
@@ -32,8 +40,13 @@ def index(request):
     history = History.objects.all()
     try:
         if((time.time()-start)>duration):
-            url ="https://api.exchangerate-api.com/v4/latest/USD"
-            response = requests.get(url).json()
+            try:
+                url ="https://api.exchangerate-api.com/v4/latest/USD"
+                response = requests.get(url).json()
+            except:
+                #for proxy servers
+                url ="https://api.exchangerate-api.com/v4/latest/USD"
+                response = requests.get(url,proxies=proxies).json()
             start = time.time()
             rates = response['rates']
     except:
