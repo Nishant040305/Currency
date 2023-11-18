@@ -1,0 +1,52 @@
+{%load static%}
+{% load dict_filters%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    <link rel="stylesheet" href="{%static 'news.css' %}">
+    <link rel = "stylesheet" href = "{%static 'navgiation.css'%}">
+</head>
+<body>
+  <!--Navigation bar-->
+  <div class="menu__bar">
+    <h1 class="logo"><img class = 'logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span></h1> <!--logo of team-->
+    <!--Content of navigation bar-->
+    <ul>
+      <li><a class="tab__nav" herf="">Home</a></li>
+      <li><a class="tab__nav" herf="/news/">News</a></li>
+      <li><a class="tab__nav" herf="#">Feeds</a> <!-- <dropdown">-->
+        <div class="dropdown__menu">
+          <ul>
+            <li><a href="#" onclick="feed('IPO')">IPO</a></li>
+            <li><a href="#" onclick="feed('Business')">Business</a></li>
+            <li><a href="#" onclick="feed('Finance')">Finance</a></li>
+          </ul>
+        </div>
+        </li>
+    </ul>
+  </div>
+      
+    
+
+    <div class = "news_page">
+        {%for i in news%}
+    <div style="width:400px;margin-top:30px;"class="template-news-card">
+        <div class="card">
+            <div class="card-header">
+                <img src="{{i|get_item:'urlToImage'}}" alt="news-image" id="news-img">
+            </div>
+            <div style="float:right;" class="card-content">
+                <a href="{{i|get_item:'url'}}" class="news-title">{{i|get_item:'title'}}</a>
+                <a class="news-source ">{{i|get_item:'author'}}</a>
+                <a class="news-desc">{{i|get_item:'description'}}</p>
+            </div>
+        </div>
+    </div>
+{%endfor%}</div>
+    <!-- <script src="{%static 'news.js' %}"></script> -->
+</body>
+</html> 
