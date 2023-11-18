@@ -22,10 +22,23 @@ with open(csv_file_path,'r') as f:
 duration = 6000
 start = time.time()
 try:
+    API_KEY = "45e8907276ac4e1e9a77d3e83a9f19f7"
+    url = "https://newsapi.org/v2/everything?q="
+    query="Finance"
+    newsurl = f'{url}{query}&apiKey={API_KEY}'
     url ="https://api.exchangerate-api.com/v4/latest/USD"
     response = requests.get(url).json()
+    news = requests.get(newsurl).json()
+    article = news['articles']
+
 except:
     #for proxy servers
+    API_KEY = "45e8907276ac4e1e9a77d3e83a9f19f7"
+    url = "https://newsapi.org/v2/everything?q="
+    query="Finance"
+    newsurl = f'{url}{query}&apiKey={API_KEY}'
+    news = requests.get(newsurl,proxies=proxies).json()
+    article = news['articles']
     url ="https://api.exchangerate-api.com/v4/latest/USD"
     response = requests.get(url,proxies=proxies).json()
 rates = response[ "rates"]
@@ -95,3 +108,5 @@ def index(request):
         fAmount=''
         tcurrencyCode='Search'
         return render(request,'index.html',{'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
+def news(request):
+    return render(request,'news.html',{'news':article})
