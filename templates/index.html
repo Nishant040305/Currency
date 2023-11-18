@@ -226,7 +226,7 @@
 
     <div class = "exchange_data">
       {%for k,j in context.items%}
-      <div class = "data"><img style="margin-right: 10px;" class = "logo_img country" src="{{k}}"><span style="margin-left:200px;">{{j}}</span><span style="margin-left:200px;">{{rates|get_item:j}}</span></div>
+      <div class = "data"><img style="margin-right: 10px;" class = "e_logo_img e_country" src="{{k}}"><span style="margin-left:200px;">{{j}}</span><span style="margin-left:200px;">{{rates|get_item:j}}</span></div>
       {%endfor%}
     </div>
   </div>
