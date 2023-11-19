@@ -5,4 +5,5 @@ urlpatterns = [
     #it will direct it to index func of views
     path('',views.index,name = 'home'),
     path('news/',views.news,name = 'news'),
+    path('home/',views.index,name = 'home'),
 ]
