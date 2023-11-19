@@ -18,8 +18,8 @@
     <h1 class="logo"><img class = 'logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span></h1> <!--logo of team-->
     <!--Content of navigation bar-->
     <ul>
-      <li><a class="tab__nav" href="">Home</a></li>
-      <li><a class="tab__nav" href="/news/">News</a></li>
+      <li><a class="tab__nav" href="{% url 'home'%}">Home</a></li>
+      <li><a class="tab__nav" href="{% url 'news'%}">News</a></li>
       <li><a class="tab__nav" href="#">Feeds</a> <!-- <dropdown">-->
         <div class="dropdown__menu">
           <ul>
