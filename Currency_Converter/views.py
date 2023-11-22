@@ -57,6 +57,7 @@ def index(request):
     global duration
     global rates
     global exrates
+    global query
     global cur_
     exchange_cur=request.GET.get("exchange_data")
     favpair = favPain.objects.all()
@@ -127,4 +128,24 @@ def index(request):
         tcurrencyCode='Search'
         return render(request,'index.html',{"x":cur_,'exrates':exrates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
 def news(request):
+    global query
+    if request.GET.get("but"):
+       query = request.GET.get("search")
+    try:
+        API_KEY = "45e8907276ac4e1e9a77d3e83a9f19f7"
+        url = "https://newsapi.org/v2/everything?q="
+        newsurl = f'{url}{query}&apiKey={API_KEY}'
+
+        news = requests.get(newsurl).json()
+        article = news['articles']
+
+
+    except:
+        #for proxy servers
+        API_KEY = "45e8907276ac4e1e9a77d3e83a9f19f7"
+        url = "https://newsapi.org/v2/everything?q="
+        
+        newsurl = f'{url}{query}&apiKey={API_KEY}'
+        news = requests.get(newsurl,proxies=proxies).json()
+        article = news['articles']
     return render(request,'news.html',{'news':article})
