@@ -107,3 +107,14 @@
 .data span{
     font-size: larger;
 }
+
+.exselect{
+    width: 250px;
+}
+.exbutton{
+    border-radius: 1rem;
+    
+}
+.xsection{
+    margin-left: 50px;
+}
