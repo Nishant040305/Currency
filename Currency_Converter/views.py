@@ -13,7 +13,10 @@ proxies = {
   'http': 'http://edcguest:edcguest@172.31.100.27:3128',
   'https': 'http://edcguest:edcguest@172.31.100.27:3128',
 }
-csv_file_path = staticfiles_storage.path('currency_name.csv')
+
+
+#
+csv_file_path = 'C:\\Users\\parth\\Downloads\\Currency-main (3)\\Currency-main\\static\\currency_name.csv'
 content = {}
 with open(csv_file_path,'r') as f:
     a =( reader(f))
@@ -42,29 +45,32 @@ except:
     url ="https://api.exchangerate-api.com/v4/latest/USD"
     response = requests.get(url,proxies=proxies).json()
 rates = response[ "rates"]
+cur_ = "USD"
+def exchange(exrates,rates,cur):
+    for i in rates:
+        exrates[i]=round(rates[i]/rates[cur],4)
+    return exrates
 def index(request):
     global content
     global response
     global start
     global duration
     global rates
-    
+    global exrates
+    global cur_
+    exchange_cur=request.GET.get("exchange_data")
     favpair = favPain.objects.all()
     history = History.objects.all()
     try:
         if((time.time()-start)>duration):
-            try:
-                url ="https://api.exchangerate-api.com/v4/latest/USD"
-                response = requests.get(url).json()
-            except:
-                #for proxy servers
-                url ="https://api.exchangerate-api.com/v4/latest/USD"
-                response = requests.get(url,proxies=proxies).json()
+            url ="https://api.exchangerate-api.com/v4/latest/{exchange_cur}"
+            response = requests.get(url).json()
             start = time.time()
             rates = response['rates']
+            exrates=exchange(exrates,rates,cur_)
     except:
         pass
-    
+
     if request.GET.get('fav'):
         tAmount=request.GET.get('bamount')
         fAmount=request.GET.get('oamount')
@@ -74,8 +80,16 @@ def index(request):
     
             data = favPain.objects.create(fromCode=field1_data, toCode=field2_data)
             data.save()
-        return render(request,'index.html',{'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':field1_data,'tcurrencyCode':field2_data,'history':history,'favpair':favpair,'rates':rates})
-
+        return render(request,'index.html',{"x":cur_,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':field1_data,'tcurrencyCode':field2_data,'history':history,'favpair':favpair,'rates':rates,'exrates':exrates})
+    elif request.GET.get('exchange'):
+        tAmount=request.GET.get('bamount')
+        fAmount=request.GET.get('oamount')
+        field1_data = request.GET.get('fromCode')
+        field2_data = request.GET.get('toCode')
+        cur=request.GET["currency"]
+        exrates = exchange(exrates,rates,cur)
+        cur_ = cur
+        return render(request,'index.html',{"x":cur_,'exrates':exrates,'rates':rates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':field1_data,'tcurrencyCode':field2_data,'history':history,'favpair':favpair,'rates':rates})
     elif request.GET.get('convert'):
         try:
             fcurrencyCode=request.GET['fromCode']
@@ -85,14 +99,15 @@ def index(request):
             tAmount=round(tAmount,3)
             data = History.objects.create(fcurrencyCode=fcurrencyCode,fAmount=fAmount,tcurrencyCode=tcurrencyCode,tAmount=tAmount)
             data.save()
-            
+
+
         except:
             tAmount=0.00
             fcurrencyCode=request.GET['fromCode']
             fAmount=0.00
             tcurrencyCode=request.GET['toCode']
 
-        return render(request,'index.html',{'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
+        return render(request,'index.html',{"x":cur_,'exrates':exrates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
 
     elif request.GET.get('calcwindow'):
         
@@ -101,12 +116,15 @@ def index(request):
         fAmount=request.GET.get('oamount')
         field1_data = request.GET.get('fromCode')
         field2_data = request.GET.get('toCode')
-        return render(request,'index.html',{'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':field1_data,'tcurrencyCode':field2_data,'favpair':favpair,'rates':rates,'history':history})
+        return render(request,'index.html',{"x":cur_,'context':content,'exrates':exrates,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':field1_data,'tcurrencyCode':field2_data,'favpair':favpair,'rates':rates,'history':history})
+    elif request.GET.get("News"):
+        return render(request,'news.html')
     else:
+        exrates=rates
         tAmount='0.00'
         fcurrencyCode='Search'
         fAmount=''
         tcurrencyCode='Search'
-        return render(request,'index.html',{'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
+        return render(request,'index.html',{"x":cur_,'exrates':exrates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
 def news(request):
     return render(request,'news.html',{'news':article})
