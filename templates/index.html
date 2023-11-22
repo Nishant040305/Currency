@@ -216,11 +216,33 @@
 <br>
 <br>
 
-  <div style="margin-top:550px; margin-bottom:50px;">
+ <div style="margin-top:550px; margin-bottom:50px;">
     <!--Navigation bar-->
     <h1 style="margin-left:350px; margin-bottom:20px;"> Live Rates</h1>
-    <div class="e_menu__bar" style="maring-top:40px;">
-        <h1 class="e_logo"><img class = 'e_logo_img e_country' src="{% static 'flag\us.png'%}"><span> USD</span></h1> <!--logo of team-->
+    <form action = "" >
+      <div class = "xsection">
+        <select class="form-control exselect" method='GET' name = 'currency' id="cur">
+
+          <!--options/currency with corresponding flags -->
+            <option id="option1",value = {{x}}> {{x}}</option> 
+          <!--context contains the dict form data of csv file-->
+          {%for i,j in context.items%}
+
+            <option value={{j}}>{{j}}</option>
+
+          {% endfor %}
+
+        </select> 
+
+      <button class="btn btn-primary convert m-2 exbutton" style="margin-left:50px;" type="submit" value = 'exchange' name = 'exchange'> 
+          
+        submit 
+
+      </button> 
+      </div>
+  <div>
+    <div class="e_menu__bar" style="margin-top:40px;">
+        <h1 class="e_logo"><img class = 'e_logo_img e_country' src="{{context|flag:x}}"><span >{{x}}</span></h1> <!--logo of team-->
     <!--Content of navigation bar-->
         <ul>
             <li><a class="e_tab__nav" href="#">Currency</a></li>
@@ -232,10 +254,12 @@
 
     <div class = "exchange_data">
       {%for k,j in context.items%}
-      <div class = "data"><img style="margin-right: 10px;" class = "e_logo_img e_country" src="{{k}}"><span style="margin-left:200px;">{{j}}</span><span style="margin-left:200px;">{{rates|get_item:j}}</span></div>
+      <div class = "data"><img style="margin-right: 10px;" class = "e_logo_img e_country" src="{{k}}"><span style="margin-left:200px;">{{j}}</span><span style="margin-left:200px;">{{exrates|get_item:j}}</span></div>
       {%endfor%}
     </div>
   </div>
+
+</div>
 
   <!--javascript file -->
   <script src = "{% static 'script.js' %}"></script>
