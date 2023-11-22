@@ -1,56 +1,62 @@
-{%load static%}
+{%load static%} <!--  this will load the static folder -->
 {% load dict_filters%}
 <!DOCTYPE html>
 <html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" text="text/css" href="{%static 'style.css' %}">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
-  <meta name="description" content="A online Currency converter in HTML5, CSS3 and Javascript." />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Currency Converter</title> 
+  <head>
+    <meta charset="UTF-8">
  
-    <!-- linking style.css file-->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+    <meta name="description" content="A online Currency converter in HTML5, CSS3 and Javascript." />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Currency Converter</title> 
+  
+     <!-- linking style.css file-->
     <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
     <link rel="stylesheet" type="text/css" href= "{% static 'style.css'%} "></style> <!--for main body-->
     <link rel="stylesheet" type="text/css" href= "{% static 'calculator.css'%} "></style> <!--for calculator-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href= "{% static 'navgiation.css'%} "></style> <!--for navigation bar-->
-    <link rel = 'stylesheet' href="{% static "exchange.css" %}">
+    <link rel = 'stylesheet' href="{% static "exchange.css" %}">   <!-- For exchange rates -->
 
 
-</head> 
-<body> 
-
-  <!--Navigation bar-->
+  </head> 
+<body>
+  <!-- Navigation bar -->
   <div class="menu__bar">
-    <h1 class="logo"><img class = 'logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span></h1> <!--logo of team-->
-    <!--Content of navigation bar-->
+    <h1 class="logo">
+      <img class='logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span> <!-- logo of web wizard -->
+    </h1> 
+
+    <!-- Content of navigation bar -->
     <ul>
       <li><a class="tab__nav" href="{% url 'home'%}">Home</a></li>
-      <li><a class="tab__nav " name="calcwindow" id = "calcwindow" onclick = "calcvisible()" href="" value='visible'>Calculator</a></li>
-      <li><a class="tab__nav" href="{% url 'news'%}">News</a></li>
-      <li><a class="tab__nav" href="#">Options</a> <!-- <dropdown">-->
+      <li><a class="tab__nav" name="calcwindow" id="calcwindow" onclick="calcvisible()" href="" value='visible'>Calculator</a></li> <!-- Calculator -->
+      <li><a class="tab__nav" href="{% url 'news'%}">News</a></li> <!-- To show news -->
+      <li>
+        <a class="tab__nav" href="#">Options</a> <!-- dropdown-->
         <div class="dropdown__menu">
           <ul>
-            <li><a href="#">Favourite</a>
-            <!-- <i class="fas fa-caret-right">-->
+            <li>
+              <a href="#">Favourite</a>
+              <!-- <i class="fas fa-caret-right">-->
               <div class="dropdown__menu-1">
                 <ul>
-                  {%for i in favpair%}
-                  <li><a class = 'favlist' onclick="favShow('{{i.fromCode}}','{{i.toCode}}')">{{i.fromCode}}<img style="height:8mm ; width: 8mm;"src="{% static "arrow3.jpg" %}" >{{i.toCode}}</a></li>
+                  <!-- To show favourites currency -->
+                  {% for i in favpair %}
+                  <!-- fromcode / tocode are the currency codes  -->
+                  <li><a class='favlist' onclick="favShow('{{i.fromCode}}','{{i.toCode}}')">{{i.fromCode}}<img style="height:8mm ; width: 8mm;" src="{% static "arrow3.jpg" %}" >{{i.toCode}}</a></li>
                   {% endfor %}
                 </ul>
               </div>
             </li>
-            <li><a onclick="historyShow()"href="#">History</a></li><!--historyShow change the style.display of .history  -->
+            <!-- To show history -->
+            <li><a onclick="historyShow()" href="#">History</a></li> <!--historyShow change the style.display of .history  -->
           </ul>
         </div>
       </li>
     </ul>
   </div>
-      
+
   
   <!-- Currency Converter  -->
   
