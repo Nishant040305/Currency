@@ -58,114 +58,99 @@
   </div>
 
   
-  <!-- Currency Converter  -->
-  
-  
-  <!--form for backend operation-->
-  <form action='',method='GET'>
-  
-    <div class="main" style=" float: left;"> 
-      <h1 class="heading  "> Currency Converter</h1> <!--Heading-->
-      <hr> 
-      <div class="row"> <!--row containing the main body of converter-->
-      
-        <div class="col-sm-6 fromSearch"> <!--from option/column of Currency Converter-->
-        
-          <div class="input-group mb-3"> 
-          
-            <div class="input-group-prepend"> 
-            
-                <span class="input-group-text">From</span> 
-            
+  <!-- Currency Converter -->
 
-            <!--search bar of Currency-->
-            <select class="form-control from" method='POST' name = 'fromCode' id="sel1">
+  <!-- Form for Backend Operation -->
+  <form action="" method="GET">
 
-              <!--options/currency with corresponding flags -->
-                <option id="option1",value = {{fcurrencyCode}}> {{fcurrencyCode}}</option> 
-              <!--context contains the dict form data of csv file-->
-              {%for i,j in context.items%}
+    <div class="main" style="float: left;">
+      <!-- Heading -->
+      <h1 class="heading">Currency Converter</h1>
+      <hr>
 
-                <option value={{j}}>{{j}}</option>
+      <!-- Main Body of Converter -->
+      <div class="row">
 
+        <!-- From Option/Column of Currency Converter -->
+        <div class="col-sm-6 fromSearch">
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">From</span>
+            </div>
+
+            <!-- Search Bar for Currency -->
+            <select class="form-control from" method="POST" name="fromCode" id="sel1">
+              <!-- Default Currency -->
+              <option id="option1" value="{{fcurrencyCode}}">{{fcurrencyCode}}</option> 
+              <!-- fcurrencyCode=currency code given to form dropdown -->
+
+              <!-- Other Currency Options -->
+              {% for i, j in context.items %}
+              <option value="{{j}}">{{j}}</option>
               {% endfor %}
-
-            </select> 
-          </div> 
-
-          </div> 
-        
-          <!--Input amount for conversion-->
-          <div class="form-group"> 
-          
-            <input type="text" name = 'oamount' id="oamount" class="form-control searchBox" placeholder="0.00" value="{{fAmount}}"> <!--fAmount can be used as a place holders-->
-          
-          </div> 
-            
-        </div> 
-
-        <div class="col-sm-6 "> <!--to option of Currency Converter-->
-
-          <div class="input-group mb-3"> 
-
-            <div class="input-group-prepend"> 
-
-              <span class="input-group-text">To</span> 
-
-            </div> 
-
-            <select class="form-control to" method="POST"  name = 'toCode' id="sel2"> 
-
-              <option id ='option2'value="{{tcurrencyCode}}"> {{tcurrencyCode}}</option> 
-
-            {%for i,j in context.items%}
-  
-              <option value={{j}}>{{j}}</option>
-
-            {% endfor %}
-
-            </select> 
-
-          </div> 
-
-          <div class="form-group"> 
-            <label type="text" class="form-control searchBox" id="bamount">{{tAmount}}
-              </label>
-                       
-
+            </select>
           </div>
 
-        </div> 
-              
-      </div> 
+          <!-- Input Amount for Conversion -->
+          <div class="form-group">
+            <input type="text" name="oamount" id="oamount" class="form-control searchBox" placeholder="0.00"
+              value="{{fAmount}}">
+          </div>
 
-      <div class="text-center"> 
-        <!--  Favourite button -->
-        <button  id='Favourite' type='submit' value = 'fav' name = 'fav'>
+        </div>
 
-          <img style= "height:9mm; width: 9mm;"src="{%static 'star.jpg' %}">
+        <!-- To Option of Currency Converter -->
+        <div class="col-sm-6">
 
-        </button> 
-      
-        <!--for Conversion convert button-->
-        <button class="btn btn-primary convert m-2"  type="submit" value = 'convert' name = 'convert'> 
-          
-          Convert 
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">To</span>
+            </div>
 
-        </button> 
+            <!-- Destination Currency Options -->
+            <select class="form-control to" method="POST" name="toCode" id="sel2">
+              <!-- Default Currency -->
+              <option id='option2' value="{{tcurrencyCode}}">{{tcurrencyCode}}</option>
+               <!-- fcurrencyCode=currency code given to form dropdown -->
 
-        <!-- reset button -->
-        <button class="btn btn-primary m-2" onclick="clearVal()"> 
+              <!-- Other Currency Options -->
+              {% for i, j in context.items %}
+              <option value="{{j}}">{{j}}</option>
+              {% endfor %}
+            </select>
+          </div>
 
-          Reset 
+          <!-- Display Converted Amount -->
+          <div class="form-group">
+            <label type="text" class="form-control searchBox" id="bamount">{{tAmount}}</label>
+          </div>
 
-        </button> 
+        </div>
 
-      </div> 
+      </div>
 
-    </div> 
+      <div class="text-center">
+        <!-- Favorite Button -->
+        <button id='Favourite' type='submit' value='fav' name='fav'>
+          <img style="height: 9mm; width: 9mm;" src="{% static 'star.jpg' %}">
+        </button>
+
+        <!-- Conversion Button -->
+        <button class="btn btn-primary convert m-2" type="submit" value='convert' name='convert'>
+          Convert
+        </button>
+
+        <!-- Reset Button -->
+        <button class="btn btn-primary m-2" onclick="clearVal()">
+          Reset
+        </button>
+      </div>
+
+    </div>
 
   </form>
+
    
 
   <!--Calculator Code-->
