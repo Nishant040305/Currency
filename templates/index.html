@@ -153,13 +153,13 @@
 
    
 
-  <!--Calculator Code-->
+    <!--Calculator Code-->
   <div class="calc" id = "calculator" style="float: right;     visibility: {{calcvisible}};">
     <input type="text" id="result" disabled>
     <br>
-    <button class="calcbut special" onclick="clearAll()">AC</button>
-    <button class="calcbut special" onclick="backspace()">CE</button>
-    <button class="calcbut special" onclick="appendNumber('%')">%</button>
+    <button class="calcbut special" onclick="clearAll()">AC</button>        <!-- clear all values-->
+    <button class="calcbut special" onclick="backspace()">CE</button>       <!-- used as a backspace -->
+    <button class="calcbut special" onclick="appendNumber('%')">%</button>  <!-- percentage symbol -->
     <button class="calcbut special" onclick="appendOperator(' / ')">/</button>
 
     <br>
@@ -184,6 +184,7 @@
   </div>
 
   <!--history code-->
+
   <div class="history" id = "historyBlock" style="border-width:10px; margin-left:700px;">
     {%for i in history%}
     <br>
@@ -196,13 +197,15 @@
     {% endfor %}
   </div>
 
-
+  
   <!--live rates-->
 <br>
 <br>
 
  <div style="margin-top:550px; margin-bottom:50px;">
+   
     <!--Navigation bar-->
+   
     <h1 style="margin-left:350px; margin-bottom:20px;"> Live Rates</h1>
     <form action = "" >
       <div class = "xsection">
