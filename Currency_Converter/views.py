@@ -47,8 +47,9 @@ except:
 rates = response[ "rates"]
 cur_ = "USD"
 def exchange(exrates,rates,cur):
+  rate_cur = rates[cur]
     for i in rates:
-        exrates[i]=round(rates[i]/rates[cur],4)
+        exrates[i]=round(rates[i]/rate_cur,4)
     return exrates
 def index(request):
     global content
