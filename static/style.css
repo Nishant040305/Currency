@@ -259,6 +259,11 @@ select .to {
     margin-left:350px; 
     margin-bottom:20px;
 }
+.e_tab__nav{
+    margin-right:60px;
+
+}
+
 @media(max-width:585px){
     .row {
         display: -ms-flexbox;
@@ -298,7 +303,20 @@ select .to {
         align-content: center;
     }
     .menu__bar{
+        float:left;
         align-self: center;
         width:100vw;
+    }
+    .historyBlock{
+        width:100vw;
+    }
+
+}
+@media(max-width:603px){
+    .exchange_data{
+        width:100%;
+    }
+    .e_menu__bar{
+        width:100%;
     }
 }
