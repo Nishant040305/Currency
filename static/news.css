@@ -6,25 +6,21 @@
     box-sizing: border-box;
 }
 
-:root {
-    --primary-text-color: #183b56;
-    --secondary-text-color: #577592;
-    --accent-color: #2294ed;
-    --accent-color-dark: #1d69a3;
-}
+
 
 body {
     font-family: "Poppins", sans-serif;
-    color: var(--primary-text-color);
+
 }
 
 p {
     font-family: "Roboto", sans-serif;
-    color: var(--secondary-text-color);
+
     line-height: 1.4rem;
 }
 
 a {
+    color:#111212;
     text-decoration: none;
 }
 
