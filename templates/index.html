@@ -20,239 +20,239 @@
 
 
   </head> 
-<body>
-  <!-- Navigation bar -->
-  <div class="menu__bar">
-    <h1 class="logo">
-      <img class='logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span> <!-- logo of web wizard -->
-    </h1> 
-
-    <!-- Content of navigation bar -->
-    <ul>
-      <li><a class="tab__nav" href="{% url 'home'%}">Home</a></li>
-      <li><a class="tab__nav" name="calcwindow" id="calcwindow" onclick="calcvisible()" href="#" value='visible'>Calculator</a></li> <!-- Calculator -->
-      <li><a class="tab__nav" href="{% url 'news'%}">News</a></li> <!-- To show news -->
-      <li>
-        <a class="tab__nav" href="#">Options</a> <!-- dropdown-->
-        <div class="dropdown__menu">
-          <ul>
-            <li>
-              <a href="#">Favourite</a>
-              <!-- <i class="fas fa-caret-right">-->
-              <div class="dropdown__menu-1">
-                <ul>
-                  <!-- To show favourites currency -->
-                  {% for i in favpair %}
-                  <!-- fromcode / tocode are the currency codes  -->
-                  <li><a class='favlist' onclick="favShow('{{i.fromCode}}','{{i.toCode}}')">{{i.fromCode}}<img style="height:8mm ; width: 8mm;" src="{% static "arrow3.jpg" %}" >{{i.toCode}}</a></li>
-                  {% endfor %}
-                </ul>
+  <body>
+    <!-- Navigation bar -->
+    <div class="menu__bar">
+      <h1 class="logo">
+        <img class='logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span> <!-- logo of web wizard -->
+      </h1> 
+  
+      <!-- Content of navigation bar -->
+      <ul>
+        <li><a class="tab__nav" href="{% url 'home'%}">Home</a></li>
+        <li><a class="tab__nav" name="calcwindow" id="calcwindow" onclick="calcvisible()" href="#" value='visible'>Calculator</a></li> <!-- Calculator -->
+        <li><a class="tab__nav" href="{% url 'news'%}">News</a></li> <!-- To show news -->
+        <li>
+          <a class="tab__nav" href="#">Options</a> <!-- dropdown-->
+          <div class="dropdown__menu">
+            <ul>
+              <li>
+                <a href="#">Favourite</a>
+                <!-- <i class="fas fa-caret-right">-->
+                <div class="dropdown__menu-1">
+                  <ul>
+                    <!-- To show favourites currency -->
+                    {% for i in favpair %}
+                    <!-- fromcode / tocode are the currency codes  -->
+                    <li><a class='favlist' onclick="favShow('{{i.fromCode}}','{{i.toCode}}')">{{i.fromCode}}<img style="height:8mm ; width: 8mm;" src="{% static "arrow3.jpg" %}" >{{i.toCode}}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+              <!-- To show history -->
+              <li><a onclick="historyShow()" href="#">History</a></li> <!--historyShow change the style.display of .history  -->
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  
+    
+    <!-- Currency Converter -->
+  
+    <!-- Form for Backend Operation -->
+    <form action="" method="GET">
+  
+      <div class="main" style="float: left;">
+        <!-- Heading -->
+        <h1 class="heading">Currency Converter</h1>
+        <hr>
+  
+        <!-- Main Body of Converter -->
+        <div class="row">
+  
+          <!-- From Option/Column of Currency Converter -->
+          <div class="col-sm-6 fromSearch">
+  
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">From</span>
               </div>
-            </li>
-            <!-- To show history -->
-            <li><a onclick="historyShow()" href="#">History</a></li> <!--historyShow change the style.display of .history  -->
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
-
   
-  <!-- Currency Converter -->
-
-  <!-- Form for Backend Operation -->
-  <form action="" method="GET">
-
-    <div class="main" style="float: left;">
-      <!-- Heading -->
-      <h1 class="heading">Currency Converter</h1>
-      <hr>
-
-      <!-- Main Body of Converter -->
-      <div class="row">
-
-        <!-- From Option/Column of Currency Converter -->
-        <div class="col-sm-6 fromSearch">
-
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">From</span>
+              <!-- Search Bar for Currency -->
+              <select class="form-control from" method="POST" name="fromCode" id="sel1">
+                <!-- Default Currency -->
+                <option id="option1" value="{{fcurrencyCode}}">{{fcurrencyCode}}</option> 
+                <!-- fcurrencyCode=currency code given to form dropdown -->
+  
+                <!-- Other Currency Options -->
+                {% for i, j in context.items %}
+                <option value="{{j}}">{{j}}</option>
+                {% endfor %}
+              </select>
             </div>
-
-            <!-- Search Bar for Currency -->
-            <select class="form-control from" method="POST" name="fromCode" id="sel1">
-              <!-- Default Currency -->
-              <option id="option1" value="{{fcurrencyCode}}">{{fcurrencyCode}}</option> 
-              <!-- fcurrencyCode=currency code given to form dropdown -->
-
-              <!-- Other Currency Options -->
-              {% for i, j in context.items %}
-              <option value="{{j}}">{{j}}</option>
-              {% endfor %}
-            </select>
-          </div>
-
-          <!-- Input Amount for Conversion -->
-          <div class="form-group">
-            <input type="text" name="oamount" id="oamount" class="form-control searchBox" placeholder="0.00"
-              value="{{fAmount}}">
-          </div>
-
-        </div>
-
-        <!-- To Option of Currency Converter -->
-        <div class="col-sm-6">
-
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">To</span>
+  
+            <!-- Input Amount for Conversion -->
+            <div class="form-group">
+              <input type="text" name="oamount" id="oamount" class="form-control searchBox" placeholder="0.00"
+                value="{{fAmount}}">
             </div>
-
-            <!-- Destination Currency Options -->
-            <select class="form-control to" method="POST" name="toCode" id="sel2">
-              <!-- Default Currency -->
-              <option id='option2' value="{{tcurrencyCode}}">{{tcurrencyCode}}</option>
-               <!-- fcurrencyCode=currency code given to form dropdown -->
-
-              <!-- Other Currency Options -->
-              {% for i, j in context.items %}
-              <option value="{{j}}">{{j}}</option>
-              {% endfor %}
-            </select>
+  
           </div>
-
-          <!-- Display Converted Amount -->
-          <div class="form-group">
-            <label type="text" class="form-control searchBox" id="bamount">{{tAmount}}</label>
+  
+          <!-- To Option of Currency Converter -->
+          <div class="col-sm-6">
+  
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">To</span>
+              </div>
+  
+              <!-- Destination Currency Options -->
+              <select class="form-control to" method="POST" name="toCode" id="sel2">
+                <!-- Default Currency -->
+                <option id='option2' value="{{tcurrencyCode}}">{{tcurrencyCode}}</option>
+                 <!-- fcurrencyCode=currency code given to form dropdown -->
+  
+                <!-- Other Currency Options -->
+                {% for i, j in context.items %}
+                <option value="{{j}}">{{j}}</option>
+                {% endfor %}
+              </select>
+            </div>
+  
+            <!-- Display Converted Amount -->
+            <div class="form-group">
+              <label type="text" class="form-control searchBox" id="bamount">{{tAmount}}</label>
+            </div>
+  
           </div>
-
+  
         </div>
-
-      </div>
-
-      <div class="text-center">
-        <!-- Favorite Button -->
-        <button id='Favourite' type='submit' value='fav' name='fav'>
-          <img style="height: 9mm; width: 9mm;" src="{% static 'star.jpg' %}">
-        </button>
-
-        <!-- Conversion Button -->
-        <button class="btn btn-primary convert m-2" type="submit" value='convert' name='convert'>
-          Convert
-        </button>
-
-        <!-- Reset Button -->
-        <button class="btn btn-primary m-2" onclick="clearVal()">
-          Reset
-        </button>
-      </div>
-
-    </div>
-
-  </form>
-
-   
-
-    <!--Calculator Code-->
-  <div class="calc" id = "calculator" style="float: right;     visibility: {{calcvisible}};">
-    <input type="text" id="result" disabled>
-    <br>
-    <button class="calcbut special" onclick="clearAll()">AC</button>        <!-- clear all values-->
-    <button class="calcbut special" onclick="backspace()">CE</button>       <!-- used as a backspace -->
-    <button class="calcbut special" onclick="appendNumber('%')">%</button>  <!-- percentage symbol -->
-    <button class="calcbut special" onclick="appendOperator(' / ')">/</button>
-
-    <br>
-    <button class="calcbut" onclick="appendNumber('7')">7</button>
-    <button class="calcbut" onclick="appendNumber('8')">8</button>
-    <button class="calcbut" onclick="appendNumber('9')">9</button>
-    <button class="calcbut special" onclick="appendOperator(' * ')">*</button>
-    <br>
-    <button class="calcbut" onclick="appendNumber('4')">4</button>
-    <button class="calcbut" onclick="appendNumber('5')">5</button>
-    <button class="calcbut" onclick="appendNumber('6')">6</button>
-    <button class="calcbut special" onclick="appendOperator(' - ')">-</button>
-    <br>
-    <button class="calcbut" onclick="appendNumber('1')">1</button>
-    <button class="calcbut" onclick="appendNumber('2')">2</button>
-    <button class="calcbut" onclick="appendNumber('3')">3</button>
-    <button class="calcbut special" onclick="appendOperator(' + ')">+</button>
-    <br>  
-    <button class="calcbut" id = 'o' onclick="appendNumber('0')">0</button>
-    <button class="calcbut special"onclick="appendNumber('.')">.</button>
-    <button class="calcbut special"id="equals" onclick="calculateResult()">=</button>
-  </div>
-
-  <!--history code-->
-
-  <div class="history" id = "historyBlock" style="border-width:10px; margin-left:700px;">
-    {%for i in history%}
-    <br>
-    <div class="history_data">
-      <label style="margin-left:100px">{{i.fcurrencyCode}}</label>  <label style="margin-left:70px">{{i.tcurrencyCode}}</label>
-      <hr style="width:50%; padding-left:20px; margin-left:40px; height:2px; margin-top:0px;margin-bottom:0px;">
-      <label style="margin-left:100px">{{i|rounding:fAmount}}</label>  <label style="margin-left:100px">{{i.tAmount}}</label>
-    <br>
-    </div>
-    {% endfor %}
-  </div>
-
   
-  <!--live rates-->
-<br>
-<br>
-
- <div style="margin-top:550px; margin-bottom:50px;">
-   
-    <!--Navigation bar-->
-   
-    <h1 style="margin-left:350px; margin-bottom:20px;"> Live Rates</h1>
-    <form action = "" >
-      <div class = "xsection">
-        <select class="form-control exselect" method='GET' name = 'currency' id="cur">
-
-          <!--options/currency with corresponding flags -->
-            <option id="option1",value = {{x}}> {{x}}</option> 
-          <!--context contains the dict form data of csv file-->
-          {%for i,j in context.items%}
-
-            <option value={{j}}>{{j}}</option>
-
-          {% endfor %}
-
-        </select> 
-
-      <button class="btn btn-primary convert m-2 exbutton" style="margin-left:50px;" type="submit" value = 'exchange' name = 'exchange'> 
-          
-        submit 
-
-      </button> 
-      </div>
-  <div>
-    <div class="e_menu__bar" style="margin-top:40px;">
-        <h1 class="e_logo"><img class = 'e_logo_img e_country' src="{{context|flag:x}}"><span >{{x}}</span></h1> <!--logo of team-->
-    <!--Content of navigation bar-->
-        <ul>
-            <li><a class="e_tab__nav" href="#">Currency</a></li>
-            <li><a class="e_tab__nav " ></a></li>
-            <li><a class="e_tab__nav" href="#">Exchange Rates</a></li>
-            <li><a class="e_tab__nav" href="#">         </a> </li>
-        </ul>
-    </div>
-
-    <div class = "exchange_data">
-      {%for k,j in context.items%}
-      <div class = "data"><img style="margin-right: 10px;" class = "e_logo_img e_country" src="{{k}}"><span style="margin-left:200px;">{{j}}</span><span style="margin-left:200px;">{{exrates|get_item:j}}</span></div>
-      {%endfor%}
-    </div>
-  </div>
-
-</div>
-
-  <!--javascript file -->
-  <script src = "{% static 'script.js' %}"></script>
+        <div class="text-center">
+          <!-- Favorite Button -->
+          <button id='Favourite' type='submit' value='fav' name='fav'>
+            <img style="height: 9mm; width: 9mm;" src="{% static 'star.jpg' %}">
+          </button>
   
-</body> 
+          <!-- Conversion Button -->
+          <button class="btn btn-primary convert m-2" type="submit" value='convert' name='convert'>
+            Convert
+          </button>
+  
+          <!-- Reset Button -->
+          <button class="btn btn-primary m-2" onclick="clearVal()">
+            Reset
+          </button>
+        </div>
+  
+      </div>
+  
+    </form>
+  
+     
+  
+      <!--Calculator Code-->
+    <div class="calc" id = "calculator" style="float: right;     visibility: {{calcvisible}};">
+      <input type="text" id="result" disabled>
+      <br>
+      <button class="calcbut special" onclick="clearAll()">AC</button>        <!-- clear all values-->
+      <button class="calcbut special" onclick="backspace()">CE</button>       <!-- used as a backspace -->
+      <button class="calcbut special" onclick="appendNumber('%')">%</button>  <!-- percentage symbol -->
+      <button class="calcbut special" onclick="appendOperator(' / ')">/</button>
+  
+      <br>
+      <button class="calcbut" onclick="appendNumber('7')">7</button>
+      <button class="calcbut" onclick="appendNumber('8')">8</button>
+      <button class="calcbut" onclick="appendNumber('9')">9</button>
+      <button class="calcbut special" onclick="appendOperator(' * ')">*</button>
+      <br>
+      <button class="calcbut" onclick="appendNumber('4')">4</button>
+      <button class="calcbut" onclick="appendNumber('5')">5</button>
+      <button class="calcbut" onclick="appendNumber('6')">6</button>
+      <button class="calcbut special" onclick="appendOperator(' - ')">-</button>
+      <br>
+      <button class="calcbut" onclick="appendNumber('1')">1</button>
+      <button class="calcbut" onclick="appendNumber('2')">2</button>
+      <button class="calcbut" onclick="appendNumber('3')">3</button>
+      <button class="calcbut special" onclick="appendOperator(' + ')">+</button>
+      <br>  
+      <button class="calcbut" id = 'o' onclick="appendNumber('0')">0</button>
+      <button class="calcbut special"onclick="appendNumber('.')">.</button>
+      <button class="calcbut special"id="equals" onclick="calculateResult()">=</button>#to get result
+    </div>
+  
+    <!--history code-->
+  
+    <div class="history" id = "historyBlock" style="border-width:10px; margin-left:700px;">
+      {%for i in history%}
+      <br>
+      <div class="history_data">
+        <label style="margin-left:100px">{{i.fcurrencyCode}}</label>  <label style="margin-left:70px">{{i.tcurrencyCode}}</label>
+        <hr style="width:50%; padding-left:20px; margin-left:40px; height:2px; margin-top:0px;margin-bottom:0px;">
+        <label style="margin-left:100px">{{i|rounding:fAmount}}</label>  <label style="margin-left:100px">{{i.tAmount}}</label>
+      <br>
+      </div>
+      {% endfor %}
+    </div>
+  
+    
+    <!--live rates-->
+  <br>
+  <br>
+  
+   <div style="margin-top:550px; margin-bottom:50px;">
+     
+      <!--Navigation bar-->
+     
+      <h1 style="margin-left:350px; margin-bottom:20px;"> Live Rates</h1>
+      <form action = "" >
+        <div class = "xsection">
+          <select class="form-control exselect" method='GET' name = 'currency' id="cur">
+  
+            <!--options/currency with corresponding flags -->
+              <option id="option1",value = {{x}}> {{x}}</option> 
+            <!--context contains the dict form data of csv file-->
+            {%for i,j in context.items%}
+  
+              <option value={{j}}>{{j}}</option>
+  
+            {% endfor %}
+  
+          </select> 
+  
+        <button class="btn btn-primary convert m-2 exbutton" style="margin-left:50px;" type="submit" value = 'exchange' name = 'exchange'> 
+            
+          submit 
+  
+        </button> 
+      </div>
+      <div>
+        <div class="e_menu__bar" style="margin-top:40px;">
+            <h1 class="e_logo"><img class = 'e_logo_img e_country' src="{{context|flag:x}}"><span >{{x}}</span></h1> <!--logo of team-->
+        <!--Content of navigation bar-->
+            <ul>
+                <li><a class="e_tab__nav" href="#">Currency</a></li>
+                <li><a class="e_tab__nav " ></a></li>
+                <li><a class="e_tab__nav" href="#">Exchange Rates</a></li>
+                <li><a class="e_tab__nav" href="#">         </a> </li>
+            </ul>
+        </div>
+        <!--Data of exchange rate for different currency-->
+        <div class = "exchange_data">
+          {%for k,j in context.items%}
+          <div class = "data"><img style="margin-right: 10px;" class = "e_logo_img e_country" src="{{k}}"><span style="margin-left:200px;">{{j}}</span><span style="margin-left:200px;">{{exrates|get_item:j}}</span></div>
+          {%endfor%}
+        </div>
+      </div>
+  
+    </div>
+  
+    <!--javascript file -->
+    <script src = "{% static 'script.js' %}"></script>
+    
+  </body> 
 
 </html>
 
