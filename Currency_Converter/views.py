@@ -108,7 +108,7 @@ def index(request):#main function
         cur=request.GET["currency"]#to get the value of its search value
         exrates = exchange(rates,cur)
         cur_ = cur
-        return render(request,'index.html',{"x":cur_,'exrates':exrates,'rates':rates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fromCode,'tcurrencyCode':toCode,'history':history,'favpair':favpair,'rates':rates})
+        return render(request,'index.html',{"x":cur_,'exrates':exrates,'rates':rates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
     
     elif request.GET.get('convert'):#to check if exchange rate button is pressed or not for conversion process
         try:#to save in history
