@@ -141,7 +141,7 @@
 
               <!-- Other Currency Options -->
               {% for i, j in context.items %}
-              <option value="{{j}}">{{j}}</option>
+              <option class = "to"value="{{j}}">{{j}}</option>
               {% endfor %}
             </select>
           </div>
@@ -179,7 +179,7 @@
    
 
     <!--Calculator Code-->
-  <div class="calc" id = "calculator" style="float: right;     visibility: {{calcvisible}};">
+  <div class="calc" id = "calculator" style="float: right;">
     <input type="text" id="result" disabled>
     <br>
     <button class="calcbut special" onclick="clearAll()">AC</button>        <!-- clear all values-->
@@ -231,7 +231,7 @@
    
     <!--Navigation bar-->
    
-    <h1 style="margin-left:350px; margin-bottom:20px;"> Live Rates</h1>
+    <h1 class = "live"> Live Rates</h1>
     <form action = "" >
       <div class = "xsection">
         <select class="form-control exselect" method='GET' name = 'currency' id="cur">
