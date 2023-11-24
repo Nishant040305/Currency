@@ -87,7 +87,11 @@
     top: 20px;
     right: 10px;
 }
-
+.menu__bar{
+    top:0;
+    right:0;
+    left:0;
+}
 @media (max-width: 820px) {
     .menu__bar .logo
     {
@@ -111,15 +115,17 @@
     }
     .menu__bar ul.active
     {
+        
         display: flex;
         flex-direction: column;
-        position: absolute;
+        /* position: absolute; */
         float: left;
         background-color: black;
         top: 12%;
         z-index: 9999;
         padding: 0;
         width: 100%;
+        top:80px;
     }
     .menu__bar ul li a
     {
@@ -129,6 +135,12 @@
     {
         margin-left: 1rem;
     }
+    .menu__bar{
+        top:0;
+        right:0;
+        left:0;
+        width:100%;
+    }
 }
 
 @media (max-width: 255px){
@@ -136,4 +148,12 @@
     {
         font-size: 1rem;
     }
+}
+@media(max-width:412){
+    .menu__bar{
+        width:412px;
+    }
+}
+@media(max-width:768px){
+    
 }
