@@ -119,6 +119,8 @@ label {
 .input-group{
     width: 7.06cm;
     height: 1.6cm;
+     display: flex;
+     flex-wrap: nowrap;
 }
 
 .mb3{
