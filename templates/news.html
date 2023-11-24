@@ -2,51 +2,51 @@
 {% load dict_filters%}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News App</title>
-        <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
-
-    <link rel="stylesheet" href="{%static 'news.css' %}">
-    <link rel = "stylesheet" href = "{%static 'navgiation.css'%}">
-</head>
-<body>
-  <!--Navigation bar-->
- <div class="menu__bar">
-    <h1 class="logo"><img class = 'logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span></h1> <!--logo of team-->
-    <!--Content of navigation bar-->
-    <ul>
-      <li><a class="tab__nav" href="{% url 'home'%}">Home</a></li>
-      <li><a class="tab__nav" href="{% url 'news'%}">News</a></li>
-      <form class="nsearch" method="GET" action="{% url 'news'%}">
-        <input type="text" class="news_h" name="search" placeholder="Search..">
-        <button name="but" type="submit"value = "but"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </svg></button>
-      </form>
-    </ul>
-  </div>
-      
-      
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>News App</title>
+        <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <!--bootstrap-->
+        <link rel="stylesheet" href="{%static 'news.css' %}"><!--news -->
+        <link rel = "stylesheet" href = "{%static 'navgiation.css'%}"><!-- for navigation bar-->
+    </head>
+    <body>
+        <!--Navigation bar-->
+        <div class="menu__bar">
+            <h1 class="logo"><img class = 'logo_img' src="{% static 'logo.jpg'%}">Web<span>Wizard.</span></h1> <!--logo of team-->
+            <!--Content of navigation bar-->
+            <ul>
+              <li><a class="tab__nav" href="{% url 'home'%}">Home</a></li>
+              <li><a class="tab__nav" href="{% url 'news'%}">News</a></li>
+              <form class="nsearch" method="GET" action="{% url 'news'%}">
+                <input type="text" class="news_h" name="search" placeholder="Search..">
+                <button name="but" type="submit"value = "but"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+              </form>
+            </ul>
+          </div>
+          
+          
+        
     
-
-    <div class = "news_page">
-        {%for i in news%}
-    <div style="width:400px;margin-top:30px;"class="template-news-card">
-        <div class="card">
-            <div class="card-header">
-                <img src="{{i|get_item:'urlToImage'}}" alt="news-image" id="news-img">
+        <div class = "news_page">
+            {%for i in news%}
+            <div style="width:400px;margin-top:30px;"class="template-news-card">
+                <div class="card">
+                    <div class="card-header">
+                        <img src="{{i|get_item:'urlToImage'}}" alt="news-image" id="news-img">
+                    </div>
+                    <div style="float:right;" class="card-content">
+                        <a href="{{i|get_item:'url'}}" class="news-title">{{i|get_item:'title'}}</a>
+                        <a class="news-source ">{{i|get_item:'author'}}</a>
+                        <a class="news-desc">{{i|get_item:'description'}}</p>
+                    </div>
+                </div>
             </div>
-            <div style="float:right;" class="card-content">
-                <a href="{{i|get_item:'url'}}" class="news-title">{{i|get_item:'title'}}</a>
-                <a class="news-source ">{{i|get_item:'author'}}</a>
-                <a class="news-desc">{{i|get_item:'description'}}</p>
-            </div>
+            {%endfor%}
         </div>
-    </div>
-{%endfor%}</div>
-    <!-- <script src="{%static 'news.js' %}"></script> -->
-</body>
+    </body>
 </html> 
