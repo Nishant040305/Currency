@@ -19,32 +19,8 @@ var toCurrecy = document.querySelector('.to');
 var display = 0;
 var searchValue = document.getElementById('oamount');
 
-//for options tag
-// const optionMenu = document.querySelector(".select-menu"),
-//        selectBtn = optionMenu.querySelectorAll(".select-btn"),
-//        options = optionMenu.querySelectorAll(".option"),
-//        sBtn_text = optionMenu.querySelector(".sBtn-text");
-
-// selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"));       
-
-// options.forEach(option =>{
-//     option.addEventListener("click", ()=>{
-//         let selectedOption = option.querySelector(".option-text").innerText;
-//         sBtn_text.innerText = selectedOption;
-
-//         optionMenu.classList.remove("active");
-//     });
-// });
-function clearVal() { 
-
-    window.location.reload(); 
-
-    document.getElementsByClassName("finalValue").innerHTML = ""; 
-};
-
-
 function appendNumber(number) {
-    
+    //append the number into calculation
     resultField.value += number;
     if (number!='%'){
         currentInput+=number;
@@ -55,7 +31,7 @@ function appendNumber(number) {
 }
 
 function appendOperator(operator) {
-
+    //append the operator
     currentInput += operator;
     resultField.value = currentInput;
 
@@ -63,7 +39,7 @@ function appendOperator(operator) {
 
 function calculateResult() {
 
-    
+    //calculate the result
     resultField.value =eval (currentInput);
     searchValue.value = resultField.value;
     currentOperator = null;
@@ -72,6 +48,7 @@ function calculateResult() {
 
 
 function clearAll() {
+    //clear all
     currentInput = '';
     currentOperator = null;
     shouldResetField = false;
@@ -84,6 +61,7 @@ function resetField() {
     currentInput = '';
 }
 function backspace() {
+    //remove last entered data
   if(currentInput.length>0) {
   if(currentInput[-1]==' '){
 
@@ -95,7 +73,7 @@ function backspace() {
   }}
 
 function calcvisible(){
-    
+    //display calculator
     if(display==1){
         calculator.style.display='block';
         display = 0;
@@ -109,6 +87,7 @@ function calcvisible(){
     }
 }
 function historyShow(){
+    //display history block
     if(display_his==1){
         his.style.display='block';
         calculator.style.display='none';
@@ -121,6 +100,7 @@ function historyShow(){
     }
 }
 function favShow(t,k){
+    //insert favourite into the search and to select tag
     document.getElementById('option1').value = t;
     document.getElementById('option2').value = k;
     document.getElementById('option1').innerHTML = t;
