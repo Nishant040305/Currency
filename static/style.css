@@ -119,8 +119,9 @@ label {
 .input-group{
     width: 7.06cm;
     height: 1.6cm;
-     display: flex;
-     flex-wrap: nowrap;
+    display:flex;
+    flex-wrap: nowrap;
+    
 }
 
 .mb3{
@@ -245,4 +246,59 @@ body{
     overflow-y: auto;
     max-height: 440px;
 
+}
+option .to{
+    display:block;
+    width : 100%;
+}
+select .to {
+    display:block;
+    width : 100%;
+}
+.live{
+    margin-left:350px; 
+    margin-bottom:20px;
+}
+@media(max-width:585px){
+    .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        align-content: stretch;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+}
+@media(max-width:768px){
+    .main{
+        width:80%;
+    }
+    .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        align-content: stretch;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+}
+@media(max-width:768px){
+    .live{
+        margin-top:47rem;
+        margin-left:2rem;
+        margin-bottom:5rem;
+    }
+    .row{
+        align-content: center;
+    }
+    .menu__bar{
+        align-self: center;
+        width:100vw;
+    }
 }
