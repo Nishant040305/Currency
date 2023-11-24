@@ -101,10 +101,10 @@ def index(request):#main function
         return render(request,'index.html',{"x":cur_,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':field1_data,'tcurrencyCode':field2_data,'history':history,'favpair':favpair,'rates':rates,'exrates':exrates})
     
     elif request.GET.get('exchange'):#to check exchange rate change button is pressed or not
-        fcurrencyCode=request.GET['fromCode']
-        fAmount=request.GET['oamount']
-        tcurrencyCode=request.GET['toCode']
-        tAmount=request.GET['bamount']
+        fcurrencyCode=request.GET.get('fromCode')
+        fAmount=request.GET.get('oamount')
+        tcurrencyCode=request.GET.get('toCode')
+        tAmount=request.GET.get('bamount')
         cur=request.GET["currency"]#to get the value of its search value
         exrates = exchange(rates,cur)
         cur_ = cur
