@@ -127,27 +127,37 @@ def index(request):#main function
             tcurrencyCode=request.GET['toCode']
 
         return render(request,'index.html',{"x":cur_,'exrates':exrates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
-
-    elif request.GET.get("News"):
-        return render(request,'news.html')
-    else:
-        exrates=rates
-        tAmount='0.00'
-        fcurrencyCode='Search'
-        fAmount=''
-        tcurrencyCode='Search'
+    
+    else:#default or starting webpage setting
+        exrates=rates #intial exchange rates for currency USD
+      
+        tAmount='0.00'#tAmount holds value of amount converted in to required currency
+      
+        fcurrencyCode='Search'#intial value of from currency
+      
+        fAmount=''#holds amount to be converted (from currency amount)
+      
+        tcurrencyCode='Search'#holds code of to currency that to be converted
+      
         return render(request,'index.html',{"x":cur_,'exrates':exrates,'context':content,'tAmount':tAmount,'fAmount':fAmount,'fcurrencyCode':fcurrencyCode,'tcurrencyCode':tcurrencyCode,'history':history,'favpair':favpair,'rates':rates})
-def news(request):
-    global query
-    if request.GET.get("but"):
-       query = request.GET.get("search")
+
+
+def news(request):#fuction for news data or page
+    global query #to hold query for news default is given to be finance
+  
+    if request.GET.get("but"):#if search button is clicked
+       query = request.GET.get("search")#data search bar
+      
     try:
-        API_KEY = "45e8907276ac4e1e9a77d3e83a9f19f7"
+        API_KEY = "45e8907276ac4e1e9a77d3e83a9f19f7"#news api
+      
         url = "https://newsapi.org/v2/everything?q="
+      
         newsurl = f'{url}{query}&apiKey={API_KEY}'
 
-        news = requests.get(newsurl).json()
-        article = news['articles']
+        news = requests.get(newsurl).json()#news response
+      
+        article = news['articles'] #articles contain source,article,image url,and link
 
 
     except:
