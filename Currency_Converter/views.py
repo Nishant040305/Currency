@@ -21,7 +21,7 @@ content = {}
 with open(csv_file_path,'r') as f:
     a =( reader(f))
     for i in a:
-        content[f"""/static/flag/{i[0]}.png"""]=i[1]
+      content[f"""/static/flag/{i[0]}.png"""]=i[1]
 duration = 6000
 start = time.time()
 try:
@@ -48,9 +48,9 @@ rates = response[ "rates"]
 cur_ = "USD"
 def exchange(exrates,rates,cur):
   rate_cur = rates[cur]
-    for i in rates:
-        exrates[i]=round(rates[i]/rate_cur,4)
-    return exrates
+  for i in rates:
+    exrates[i]=round(rates[i]/rate_cur,4)
+  return exrates
 def index(request):
     global content
     global response
