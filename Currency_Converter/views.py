@@ -130,7 +130,7 @@ def index(request):#main function
     
     else:#default or starting webpage setting
         exrates=rates #intial exchange rates for currency USD
-      
+        cur_ = 'USD'
         tAmount='0.00'#tAmount holds value of amount converted in to required currency
       
         fcurrencyCode='Search'#intial value of from currency
