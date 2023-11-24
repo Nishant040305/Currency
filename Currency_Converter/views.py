@@ -16,7 +16,7 @@ proxies = {
 
 
 #
-csv_file_path = 'C:\\Users\\parth\\Downloads\\Currency-main (3)\\Currency-main\\static\\currency_name.csv'
+csv_file_path = staticfiles_storage.path('currency_name.csv')
 content = {}
 with open(csv_file_path,'r') as f:
     a =( reader(f))
@@ -64,7 +64,7 @@ def index(request):
     history = History.objects.all()
     try:
         if((time.time()-start)>duration):
-            url ="https://api.exchangerate-api.com/v4/latest/{exchange_cur}"
+            url ="https://api.exchangerate-api.com/v4/latest/USD"
             response = requests.get(url).json()
             start = time.time()
             rates = response['rates']
